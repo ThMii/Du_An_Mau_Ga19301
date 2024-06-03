@@ -54,7 +54,7 @@ namespace Assets.Scripts
                 box.IsTouchingLayers(LayerMask.GetMask("Traps")))
             {
                 isAlive = false;
-                anim.SetTrigger("Dying");
+                anim.SetTrigger("Death");
                 rb.velocity = deathVelocity;
                 FindObjectOfType<GameSession>().ProcessPlayerDeath();
             }
