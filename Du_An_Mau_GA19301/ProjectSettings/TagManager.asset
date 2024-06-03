@@ -19,7 +19,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Bullet
   - Traps
   - Pickups
   - 
@@ -53,4 +53,7 @@ TagManager:
     locked: 0
   - name: ui
     uniqueID: 845335263
+    locked: 0
+  - name: Bullet
+    uniqueID: 4177056141
     locked: 0

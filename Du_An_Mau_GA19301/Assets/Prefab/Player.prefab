@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf5d20b0dac7844cbf6e39739cb3dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1746095846346683469, guid: 6aae0c962b447564d9e636c9bcba1b15, type: 3}
+  bullet: {fileID: 3222379125416696879, guid: 6aae0c962b447564d9e636c9bcba1b15, type: 3}
   gun: {fileID: 3513737863714221639}
   runSpeed: 10
   jumpSpeed: 10

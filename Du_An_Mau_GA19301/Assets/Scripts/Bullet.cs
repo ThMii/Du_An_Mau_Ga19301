@@ -6,7 +6,7 @@ namespace Assets.Scripts
     public class Bullet : MonoBehaviour
     {
         private Rigidbody2D myRigidbody;
-        private CapsuleCollider2D bulletCollider;
+        private BoxCollider2D bulletCollider;
         [SerializeField] private float bulletSpeed;
 
 
@@ -17,7 +17,7 @@ namespace Assets.Scripts
         void Start()
         {
             myRigidbody = GetComponent<Rigidbody2D>();
-            bulletCollider = GetComponent<CapsuleCollider2D>();
+            bulletCollider = GetComponent<BoxCollider2D>();
             player = FindObjectOfType<Player>();
 
             xSpeed = player.transform.localScale.x * bulletSpeed;
