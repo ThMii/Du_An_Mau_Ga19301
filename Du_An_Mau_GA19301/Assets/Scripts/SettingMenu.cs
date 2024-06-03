@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class SettingMenu : MonoBehaviour
+namespace Assets.Scripts
 {
-   /* [SerializeField] GameObject settingMenu;
-    public void Setting()
+    public class SettingMenu : MonoBehaviour
     {
-        settingMenu.SetActive(true);
-        Time.timeScale = 0;
+        [SerializeField] GameObject settingMenu;
+        public void Setting()
+        {
+            settingMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
+        public void X()
+        {
+            settingMenu.SetActive(false);
+            Time.timeScale = 1;
+  
+        }
     }
-    public void X()
-    {
-        settingMenu.SetActive(false);
-        Time.timeScale = 1;
-        
-    }*/
 }
+
