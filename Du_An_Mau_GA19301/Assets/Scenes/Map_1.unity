@@ -1013,7 +1013,7 @@ GameObject:
   - component: {fileID: 367027194}
   - component: {fileID: 367027193}
   - component: {fileID: 367027192}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Spiketrap Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
