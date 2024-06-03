@@ -56,7 +56,7 @@ namespace Assets.Scripts
                 isAlive = false;
                 anim.SetTrigger("Dying");
                 rb.velocity = deathVelocity;
-                //FindObjectOfType<GameSession>().ProcessPlayerDeath();
+                FindObjectOfType<GameSession>().ProcessPlayerDeath();
             }
         }
 
