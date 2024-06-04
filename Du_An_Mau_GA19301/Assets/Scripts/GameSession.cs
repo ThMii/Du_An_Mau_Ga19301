@@ -8,18 +8,13 @@ namespace Assets.Scripts
     public class GameSession : MonoBehaviour
     {
         [SerializeField] private int playerLives = 3;
-
         [SerializeField] private TextMeshProUGUI livesText;
-
-        [SerializeField] TextMeshProUGUI scoreText;
-
+        [SerializeField] private TextMeshProUGUI scoreText;
         private int gameScore = 0;
-
 
         void Awake()
         {
             int numGameSessions = FindObjectsOfType<GameSession>().Length;
-
             if (numGameSessions > 1)
             {
                 Destroy(gameObject);
@@ -44,21 +39,20 @@ namespace Assets.Scripts
             }
             else
             {
-                ResetGameSession();
+                LoadGameOverScene();
             }
         }
 
-        private void ResetGameSession()
+        private void LoadGameOverScene()
         {
-            FindObjectOfType<ScenePersist>().ResetScreenPersist();
-            SceneManager.LoadScene(0);
-            Destroy(gameObject);
-            livesText.text = playerLives.ToString();
+            // Assuming "GameOver" is the name of your game over scene
+            SceneManager.LoadScene("GameOver");
         }
 
         private void TakeLife()
         {
             playerLives--;
+            livesText.text = playerLives.ToString();
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex);
         }
