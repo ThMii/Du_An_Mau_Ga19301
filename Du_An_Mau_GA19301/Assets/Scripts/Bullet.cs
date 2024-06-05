@@ -1,47 +1,56 @@
-using Unity.VisualScripting;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts
+public class Weapon : MonoBehaviour
 {
-    public class Bullet : MonoBehaviour
+    // Start is called before the first frame update
+    public Transform firePoint;
+    public GameObject ammoType;
+    public float shotSpeed;
+    public float shotCounter, fireRate;
+    private Animator playerAnim; //Animation
+    void Start()
     {
-        private Rigidbody2D myRigidbody;
-        private BoxCollider2D bulletCollider;
-        [SerializeField] private float bulletSpeed;
+        playerAnim = GetComponentInParent<Animator>();
+    }
 
-
-        private Player player;
-        private float xSpeed;
-
-
-        void Start()
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetMouseButton(0))
         {
-            myRigidbody = GetComponent<Rigidbody2D>();
-            bulletCollider = GetComponent<BoxCollider2D>();
-            player = FindObjectOfType<Player>();
-
-            xSpeed = player.transform.localScale.x * bulletSpeed;
-        }
-
-        void Update()
-        {
-            myRigidbody.velocity = new Vector2(xSpeed, 0f);
-        }
-
-
-        void OnTriggerEnter2D(Collider2D col)
-        {
-            if (col.tag == "Enemy")
+            shotCounter -= Time.deltaTime;
+            if (shotCounter <= 0)
             {
-                Destroy(col.gameObject);
+                shotCounter = fireRate;
+                Shoot();
             }
-            Destroy(gameObject);
+
+
         }
-
-
-        void OnCollisionEnter2D(Collision2D col)
+        else
         {
-            Destroy(gameObject);
+            shotCounter = 0;
+
         }
+    }
+    void Shoot() //Instantiate Prefab
+    {
+        int PlayerX()
+        {
+            if (transform.parent.localScale.x < 0f)
+            {
+                return -1;
+            }
+            else
+            {
+                return +1;
+            }
+        }
+        GameObject shot = Instantiate(ammoType, firePoint.position, firePoint.rotation);
+        Rigidbody2D shotRB = shot.GetComponent<Rigidbody2D>();
+        shotRB.AddForce(firePoint.right * shotSpeed * PlayerX(), ForceMode2D.Impulse);
+        Destroy(shot.gameObject, 1f);
     }
 }

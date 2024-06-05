@@ -11,8 +11,8 @@ namespace Assets.Scripts
 
         private float gravityScaleAtStart;
 
-        [SerializeField] private GameObject bullet;
-        [SerializeField] private GameObject gun;
+        //[SerializeField] private GameObject bullet;
+        //[SerializeField] private GameObject gun;
 
         private Rigidbody2D rb;
         private Animator anim;
@@ -60,12 +60,12 @@ namespace Assets.Scripts
             }
         }
 
-        void OnFire(InputValue value)
-        {
-            if (!isAlive)
-                return;
-            Instantiate(bullet, gun.transform.position, transform.rotation);
-        }
+       // void OnFire(InputValue value)
+        //{
+           // if (!isAlive)
+                //return;
+           // Instantiate(bullet, gun.transform.position, transform.rotation);
+       // }
         void Flip()
         {
             bool havemove = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
