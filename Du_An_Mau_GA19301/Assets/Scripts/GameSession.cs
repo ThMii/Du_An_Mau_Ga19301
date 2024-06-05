@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +9,7 @@ namespace Assets.Scripts
         [SerializeField] private int playerLives = 3;
         [SerializeField] private TextMeshProUGUI livesText;
         [SerializeField] private TextMeshProUGUI scoreText;
+
         private int gameScore = 0;
 
         void Awake()
@@ -45,7 +45,6 @@ namespace Assets.Scripts
 
         private void LoadGameOverScene()
         {
-            // Assuming "GameOver" is the name of your game over scene
             SceneManager.LoadScene("GameOver");
         }
 
@@ -61,6 +60,12 @@ namespace Assets.Scripts
         {
             gameScore += pointsToAdd;
             scoreText.text = gameScore.ToString();
+        }
+
+        public void AddLife()
+        {
+            playerLives++;
+            livesText.text = playerLives.ToString();
         }
     }
 }
