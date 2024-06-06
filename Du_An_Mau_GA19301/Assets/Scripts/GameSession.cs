@@ -53,7 +53,7 @@ namespace Assets.Scripts
             playerLives--;
             livesText.text = playerLives.ToString();
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(currentSceneIndex);
+            SceneManager.LoadScene("GameOver");
         }
 
         public void AddToScore(int pointsToAdd)
