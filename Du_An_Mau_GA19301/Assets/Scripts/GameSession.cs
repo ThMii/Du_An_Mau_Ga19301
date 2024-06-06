@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,8 +27,7 @@ namespace Assets.Scripts
 
         void Start()
         {
-            livesText.text = playerLives.ToString();
-            scoreText.text = gameScore.ToString();
+            UpdateUI();
         }
 
         public void ProcessPlayerDeath()
@@ -46,26 +45,33 @@ namespace Assets.Scripts
         private void LoadGameOverScene()
         {
             SceneManager.LoadScene("GameOver");
+            Destroy(gameObject);  // Hủy đối tượng GameSession khi chuyển đến cảnh GameOver
         }
 
         private void TakeLife()
         {
             playerLives--;
-            livesText.text = playerLives.ToString();
+            UpdateUI();
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene(currentSceneIndex);
         }
 
         public void AddToScore(int pointsToAdd)
         {
             gameScore += pointsToAdd;
-            scoreText.text = gameScore.ToString();
+            UpdateUI();
         }
 
         public void AddLife()
         {
             playerLives++;
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
             livesText.text = playerLives.ToString();
+            scoreText.text = gameScore.ToString();
         }
     }
 }

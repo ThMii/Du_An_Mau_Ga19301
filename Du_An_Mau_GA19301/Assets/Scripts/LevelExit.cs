@@ -1,36 +1,28 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts
+public class NextLv : MonoBehaviour
 {
-    public class LevelExit : MonoBehaviour
+    public string tenManChoi;
+
+    public void LoadManChoiMoi()
     {
-        [SerializeField] float levelLoadDelay;
-        void OnTriggerEnter2D(Collider2D col)
+        StartCoroutine(DelayLoadScene());
+    }
+
+    IEnumerator DelayLoadScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(tenManChoi);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
-            if (col.CompareTag("Player"))
-            {
-                StartCoroutine(LoadNextLevel());
-            }
-
-            StartCoroutine(LoadNextLevel());
-        }
-
-        IEnumerator LoadNextLevel()
-        {
-            yield return new WaitForSecondsRealtime(levelLoadDelay);
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            int nextSceneIndex = currentSceneIndex + 1;
-
-            if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
-            {
-                nextSceneIndex = 0;
-            }
-
-            FindObjectOfType<ScenePersist>().ResetScreenPersist();
-            SceneManager.LoadScene(nextSceneIndex);
+            LoadManChoiMoi();
         }
     }
 }
+
