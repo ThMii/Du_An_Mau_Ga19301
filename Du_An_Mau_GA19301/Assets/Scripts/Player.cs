@@ -60,12 +60,12 @@ namespace Assets.Scripts
             }
         }
 
-       // void OnFire(InputValue value)
+        // void OnFire(InputValue value)
         //{
-           // if (!isAlive)
-                //return;
-           // Instantiate(bullet, gun.transform.position, transform.rotation);
-       // }
+        // if (!isAlive)
+        //return;
+        // Instantiate(bullet, gun.transform.position, transform.rotation);
+        // }
         void Flip()
         {
             bool havemove = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
