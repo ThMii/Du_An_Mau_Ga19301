@@ -2,55 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Transform firePoint;
-    public GameObject ammoType;
-    public float shotSpeed;
-    public float shotCounter, fireRate;
-    private Animator playerAnim; //Animation
+
+    public float speed = 20f;
+    public int damage = 40;
+    public Rigidbody2D rb;
+    public GameObject impactEffect;
+
+    // Use this for initialization
     void Start()
     {
-        playerAnim = GetComponentInParent<Animator>();
+        rb.velocity = transform.right * speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (Input.GetMouseButton(0))
+        BossHealth enemy = hitInfo.GetComponent<BossHealth>();
+        if (enemy != null)
         {
-            shotCounter -= Time.deltaTime;
-            if (shotCounter <= 0)
-            {
-                shotCounter = fireRate;
-                Shoot();
-            }
-
-
+            enemy.TakeDamage(damage);
         }
-        else
-        {
-            shotCounter = 0;
 
-        }
+        Instantiate(impactEffect, transform.position, transform.rotation);
+
+        Destroy(gameObject);
     }
-    void Shoot() //Instantiate Prefab
-    {
-        int PlayerX()
-        {
-            if (transform.parent.localScale.x < 0f)
-            {
-                return -1;
-            }
-            else
-            {
-                return +1;
-            }
-        }
-        GameObject shot = Instantiate(ammoType, firePoint.position, firePoint.rotation);
-        Rigidbody2D shotRB = shot.GetComponent<Rigidbody2D>();
-        shotRB.AddForce(firePoint.right * shotSpeed * PlayerX(), ForceMode2D.Impulse);
-        Destroy(shot.gameObject, 1f);
-    }
+
 }
