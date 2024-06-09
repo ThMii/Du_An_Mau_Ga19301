@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
     public float speed = 20f;
     public int damage = 40;
-    public Rigidbody2D rb;
-    public GameObject impactEffect;
+    private Rigidbody2D rb;
 
-    // Use this for initialization
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        rb = GetComponent<Rigidbody2D>();
+
+        // Điều chỉnh hướng đạn dựa trên hướng của player
+        Vector2 moveDirection = transform.right;
+        if (transform.localScale.x < 0)
+        {
+            moveDirection = -transform.right; // Điều chỉnh hướng nếu player quay sang trái
+        }
+
+        rb.velocity = moveDirection * speed;
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        BossHealth enemy = hitInfo.GetComponent<BossHealth>();
-        if (enemy != null)
+        BossHealth boss = hitInfo.GetComponent<BossHealth>();
+        if (boss != null)
         {
-            enemy.TakeDamage(damage);
+            boss.TakeDamage(damage);
         }
-
-        Instantiate(impactEffect, transform.position, transform.rotation);
-
         Destroy(gameObject);
     }
-
 }
