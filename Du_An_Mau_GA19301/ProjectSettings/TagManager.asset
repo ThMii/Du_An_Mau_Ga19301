@@ -8,6 +8,8 @@ TagManager:
   - enemy
   - Enemy
   - checkarrows
+  - Ground
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Player
   - 
   - 
-  - 
+  - Boss
   - Bullet
   - Traps
   - Pickups
