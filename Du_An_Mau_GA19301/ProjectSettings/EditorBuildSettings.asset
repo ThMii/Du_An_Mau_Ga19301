@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: aee919d3efc433f42958a4f51a1760a7
   - enabled: 1
-    path: Assets/Scenes/Map_2.unity
+    path: Assets/Scenes/Map_1.unity
     guid: 359b2eb3ab24da44cb7a62866ac18c5d
   - enabled: 1
-    path: Assets/Scenes/Map_3.unity
+    path: Assets/Scenes/Map_2.unity
     guid: 081eef7c97ec86944a704d7a3ef14e99
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
