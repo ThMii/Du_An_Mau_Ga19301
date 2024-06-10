@@ -11,7 +11,7 @@ namespace Assets.Scripts
                 GameSession gameSession = FindObjectOfType<GameSession>();
                 if (gameSession != null)
                 {
-                    gameSession.AddLife();
+                    //gameSession.AddLife();
                 }
                 Destroy(gameObject);
             }

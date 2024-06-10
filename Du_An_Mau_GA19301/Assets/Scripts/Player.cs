@@ -26,7 +26,11 @@ namespace Assets.Scripts
         private bool isAlive = true;
         [SerializeField] private Vector2 deathVelocity = new Vector2(0f, 10f);
 
-
+        private AudioManager audioManager;
+        private void Awake()
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        }
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -93,6 +97,7 @@ namespace Assets.Scripts
             if (value.isPressed)
             {
                 rb.velocity += new Vector2(0f, jumpSpeed);
+                audioManager.PlaySFX(audioManager.Jump);
             }
         }
         void Run()
