@@ -1,4 +1,5 @@
-﻿using TMPro;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,14 +8,18 @@ namespace Assets.Scripts
     public class GameSession : MonoBehaviour
     {
         [SerializeField] private int playerLives = 3;
+
         [SerializeField] private TextMeshProUGUI livesText;
-        [SerializeField] private TextMeshProUGUI scoreText;
+
+        [SerializeField] TextMeshProUGUI scoreText;
 
         private int gameScore = 0;
+
 
         void Awake()
         {
             int numGameSessions = FindObjectsOfType<GameSession>().Length;
+
             if (numGameSessions > 1)
             {
                 Destroy(gameObject);
@@ -27,7 +32,8 @@ namespace Assets.Scripts
 
         void Start()
         {
-            UpdateUI();
+            livesText.text = playerLives.ToString();
+            scoreText.text = gameScore.ToString();
         }
 
         public void ProcessPlayerDeath()
@@ -38,20 +44,21 @@ namespace Assets.Scripts
             }
             else
             {
-                LoadGameOverScene();
+                ResetGameSession();
             }
         }
 
-        private void LoadGameOverScene()
+        private void ResetGameSession()
         {
-            SceneManager.LoadScene("GameOver");
-            Destroy(gameObject);  // Hủy đối tượng GameSession khi chuyển đến cảnh GameOver
+            FindObjectOfType<ScenePersist>().ResetScreenPersist();
+            SceneManager.LoadScene(0);
+            Destroy(gameObject);
+            livesText.text = playerLives.ToString();
         }
 
         private void TakeLife()
         {
             playerLives--;
-            UpdateUI();
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex);
         }
@@ -59,18 +66,6 @@ namespace Assets.Scripts
         public void AddToScore(int pointsToAdd)
         {
             gameScore += pointsToAdd;
-            UpdateUI();
-        }
-
-        public void AddLife()
-        {
-            playerLives++;
-            UpdateUI();
-        }
-
-        private void UpdateUI()
-        {
-            livesText.text = playerLives.ToString();
             scoreText.text = gameScore.ToString();
         }
     }

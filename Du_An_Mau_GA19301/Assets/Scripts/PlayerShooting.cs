@@ -7,7 +7,11 @@ public class PlayerShooting : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
-
+    private AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -20,6 +24,7 @@ public class PlayerShooting : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        audioManager.PlaySFX(audioManager.bullet);
 
         if (transform.localScale.x < 0)
         {
